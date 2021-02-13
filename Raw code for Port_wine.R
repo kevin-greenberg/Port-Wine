@@ -67,8 +67,6 @@ DT::datatable((SumP),
 
 
 
-```
-
 # Now lets look at the best one varieties...Port. From the Varities of Wine in Portugal graph  above we can tell that we have 607 different ports.
 
 Port <- filter(WP, variety == 'Port') 
@@ -82,31 +80,30 @@ caption = 'Table 2: This is a table of all the Port wine.')
 
 
 
-```
-Here we have a chart of their price by points. 
+ 
+#Here we have a chart of their price by points. 
 
 
-```{r fig.width=10,fig.height=5}
 ggplot(Port, aes(x = points, y = price)) +
 geom_point(position = 'jitter', shape=42, size=10) +
   geom_smooth(method='lm',formula=y~x, se = FALSE) +
   theme_bw()+
   ggtitle("Price by Points of Port")
-```
-Below you can see the correlation of price by points.
-```{r}
+ 
+#Below you can see the correlation of price by points.
+
 cor(Port$price, Port$points, use = "complete.obs")
   
-```
+ 
 
-If we look at the Port by the winery we can tell there are 97 different wineries, by using `wine <- filter(wine, variety == 'Port') %>% group_by(winery) %>% summarise(count = n())`
+# If we look at the Port by the winery we can tell there are 97 different wineries, by using `wine <- filter(wine, variety == 'Port') %>% group_by(winery) %>% summarise(count = n())`
+ 
+
+# Now it be great to be able to taste wines from all these different places, but let's narrow the Ports down to some of winery I've tasted.
 
 
-Now it be great to be able to taste wines from all these different places, but let's narrow the Ports down to some of winery I've tasted.
 
 
-
-```{r fig.width=10,fig.height=5}
 selectPorts <- filter(Port,grepl('Broad|Church|Dow|Ferr|Fonseca|do Noval|Warre|Taylor|Kopke|Sand', winery)
              )
 ggplot(selectPorts, aes(x=winery, fill=winery))+
@@ -115,11 +112,10 @@ ggplot(selectPorts, aes(x=winery, fill=winery))+
   theme_dark() 
  
 
-```
-As you can see Taylor Flagate and Kopke have the most Ports in this dataset.
-Now Lets move away from the data and go look where these Ports come from.
+ 
+# As you can see Taylor Flagate and Kopke have the most Ports in this dataset.
+# Now Lets move away from the data and go look where these Ports come from.
 
-```{r fig.width=10,fig.height=5}
 leaflet() %>%
   setView(lng= -7.5441, lat = 41.17, zoom = 10) %>%
   addTiles() %>%
@@ -130,7 +126,7 @@ addMarkers(lng =-7.5434, lat = 41.1873, popup = "Churchill's") %>%
 
 
 
-```
+ 
 
 
 
